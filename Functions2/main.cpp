@@ -1,20 +1,12 @@
-#include<iostream>
-using namespace std;
-#define tab "\t"                     
-
-void FillRand(char arr[], const int n, int minRand = 0, int maxRand = 100);
-void FillRand(int arr[], const int n, int minRand = 0, int maxRand = 100);
-void FillRand(float arr[], const int n, int minRand = 0, int maxRand = 100);
-void FillRand(double arr[], const int n, int minRand = 0, int maxRand = 100);
-
-template<typename T>void Print(T arr[], const int n);
-template<typename T>void ShiftLeft(T arr[], const int n, const int number_of_shifts);
-template<typename T>T Sum(T arr[], const int n);
-template<typename T>double Avg(T arr[], const int n);
-template<typename T>T Min(T arr[], const int n);
-template<typename T>T Max(T arr[], const int n);
-template<typename T>void Sort(T arr[], const int n);
-
+#include"FillRand.h"    
+#include"Print.h"
+#include"Print.cpp"
+#include"Shift.h"
+#include"Shift.cpp"
+#include"Sort.h"
+#include"Sort.cpp"
+#include"Stat.h"
+#include"Stat.cpp"
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -83,113 +75,6 @@ void main()
 	ShiftLeft(f_arr, SIZE_FLOAT, number_of_shifts);
 	Print(f_arr, SIZE_FLOAT);
 }
-void FillRand(char arr[], const int n, int minRand, int maxRand)
-{
-	//Заполняем массив случайными числами;
-	for (int i = 0; i < n; i++)
-	{
-		arr[i] = rand() % 256;
-	}
-}
-void FillRand(int arr[], const int n, int minRand, int maxRand)
-{
-	//Заполняем массив случайными числами;
-	for (int i = 0; i < n; i++)
-	{
-		arr[i] = rand() % (maxRand - minRand) + minRand;
-	}
-}
-void FillRand(float arr[], const int n, int minRand, int maxRand)
-{
-	//Заполняем массив случайными числами;
-	minRand *= 100;
-	maxRand *= 100;
-	for (int i = 0; i < n; i++)
-	{
-		arr[i] = rand() % (maxRand - minRand) + minRand;
-		arr[i] /= 100;
-		// Функция rand() возвращает псевдослучайное число в диапазоне от 0 до 32 767
-	}
-}
-void FillRand(double arr[], const int n, int minRand, int maxRand)
-{
-	//Заполняем массив случайными числами;
-	minRand *= 100;
-	maxRand *= 100;
-	for (int i = 0; i < n; i++)
-	{
-		arr[i] = rand() % (maxRand - minRand) + minRand;
-		arr[i] /= 100;
-		// Функция rand() возвращает псевдослучайное число в диапазоне от 0 до 32 767
-	}
-}
-template<typename T>void Print(T arr[], const int n)
-{
-	// Выводим массив на экран:
-	for (int i = 0; i < n; i++)
-	{
-		cout << arr[i] << tab;
-	}
-	cout << endl;
-}
-template <typename T>void ShiftLeft(T arr[], const int n, const int number_of_shifts)
-{
-	for (int i = 0; i < number_of_shifts; i++)
-	{
-		T buffer = arr[0];
-		for (int j = 0; j < n; j++)
-		{
-			arr[j] = arr[j + 1];
-		}
-		arr[n - 1] = buffer;
-	}
-}
-template<typename T>T Sum(T arr[], const int n)
-{
-	T sum = 0;
-	for (int i = 0; i < n; i++)
-	{
-		sum += arr[i];
-	}
-	return sum;
-}
-template<typename T>double Avg(T arr[], const int n)
-{
-	return (double)Sum(arr, n) / n;
-}
 
-template<typename T>T Min(T arr[], const int n)
-{
-	T min = arr[0];
-	for (int i = 0; i < n; i++)
-	{
-		if (arr[i] < min)min = arr[i];
-	}
-	return min;
-}
 
-template<typename T>T Max(T arr[], const int n)
-{
-	T max = arr[0];
-	for (int i = 0; i < n; i++)
-	{
-		if (arr[i] > max)max = arr[i];
 
-	}
-	return max;
-}
-template<typename T>void Sort(T arr[], const int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = i + 1; j < n; j++)
-		{
-			if (arr[j] < arr[i])
-			{
-				T buffer = arr[i];
-				arr[i] = arr[j];
-				arr[j] = buffer;
-			}
-		}
-	}
-}
